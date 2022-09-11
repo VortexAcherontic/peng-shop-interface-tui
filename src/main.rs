@@ -45,6 +45,12 @@ fn interactive_query_command(){
         "install" | "in" | "i" => {
             peng_shop_backend::install(inputs[0..inputs.len()].to_vec());
         },
+        "uninstall" | "rm" | "r" | "u" | "un" => {
+            peng_shop_backend::uninstall(inputs[0..inputs.len()].to_vec());
+        },
+        "refresh" | "ref" => {
+            peng_shop_backend::upgrade();
+        },
         "exit" | "q" | "e" => {
             println!("Exiting TUI");
             std::process::exit(0);
