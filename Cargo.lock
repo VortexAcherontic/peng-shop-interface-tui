@@ -5,7 +5,7 @@ version = 3
 [[package]]
 name = "peng-shop-backend"
 version = "0.1.0"
-source = "git+https://github.com/VortexAcherontic/peng-shop-backend#d8c86eedd240fa238dd449aa63163fb3725dd85a"
+source = "git+https://github.com/VortexAcherontic/peng-shop-backend#db333c3452b4fdb4e15d980be08a5f5a0ce6de63"
 dependencies = [
  "peng-shop-backend-flatpak",
  "peng-shop-backend-snap",

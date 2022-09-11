@@ -17,40 +17,37 @@ fn main(){
 
 }
 
-fn install(package:String){
-    println!("Install not implemented yet!");
-    peng_shop_backend::install(package);
-}
-
-fn uninstall(){ 
-    println!("Uninstall not implemented yet!");
-}
-
 fn refresh(){
     println!("Refresh not implemented yet!");
 }
 
 fn interactive(){
     println!("Welcome to {APPLICATION_NAME} {MODULE_NAME} Version: {VERSION}");
-    println!("You have not specified what to do.\nEntering interactive mode:");
+    println!("Entering interactive mode:");
     interactive_query_command();    
 }
 
 fn interactive_query_command(){
     println!("What do you want to do?");
     let mut cmd:String = String::new();
+
     io::stdin()
-        .read_line(&mut cmd)
-        .expect("No command given");
-    
-    println!("Running cmd '{}'", cmd.as_str().trim());
-    match cmd.as_str().trim() {
+    .read_line(&mut cmd)
+    .expect("No command given");
+
+    let split = cmd.split(" ");
+    let collected:Vec<&str> = split.collect();
+    let inputs:Vec<String> = collected.iter()
+    .map(|&s|s.trim().into())
+    .collect();
+
+    match inputs[0].as_str() {
         "install" => {
-            install("nothing".to_string());
+            peng_shop_backend::install(inputs[0..inputs.len()].to_vec());
         },
         "exit" => {
             println!("Exiting TUI");
-            std::process::exit(1);
+            std::process::exit(0);
         }
         _ => {
             interactive_query_command();
