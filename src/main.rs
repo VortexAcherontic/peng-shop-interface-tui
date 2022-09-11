@@ -1,7 +1,5 @@
 use std::env;
 use std::io;
-use std::process;
-use rand::Rng;
 use peng_shop_backend;
 
 const APPLICATION_NAME:&str="Peng!Shop";
