@@ -42,10 +42,10 @@ fn interactive_query_command(){
     .collect();
 
     match inputs[0].as_str() {
-        "install" => {
+        "install" | "in" | "i" => {
             peng_shop_backend::install(inputs[0..inputs.len()].to_vec());
         },
-        "exit" => {
+        "exit" | "q" | "e" => {
             println!("Exiting TUI");
             std::process::exit(0);
         }
