@@ -8,17 +8,12 @@ const VERSION:&str="0.1";
 
 fn main(){
     let args:Vec<String> = env::args().collect();
-    //dbg!(&args);
-    if args.len() == 1 || &args[1] == "interactive" || &args[1] == "int" {
+    if args.len() == 1 || &args[1] == "interactive" || &args[1] == "int"{
         interactive();
     } else {
-        println!("Blub");
+        handle_command(&args[1], args[2..args.len()].to_vec());
     }
 
-}
-
-fn refresh(){
-    println!("Refresh not implemented yet!");
 }
 
 fn interactive(){
@@ -41,15 +36,25 @@ fn interactive_query_command(){
     .map(|&s|s.trim().into())
     .collect();
 
-    match inputs[0].as_str() {
+    handle_command(inputs[0].to_lowercase().as_str(), inputs[0..inputs.len()].to_vec())
+}
+
+fn handle_command(command:&str, packages:Vec<String>){
+    match command {
         "install" | "in" | "i" => {
-            peng_shop_backend::install(inputs[0..inputs.len()].to_vec());
+            peng_shop_backend::install(packages);
         },
-        "uninstall" | "rm" | "r" | "u" | "un" => {
-            peng_shop_backend::uninstall(inputs[0..inputs.len()].to_vec());
+        "uninstall" | "remove" | "rm" | "r"  => {
+            peng_shop_backend::uninstall(packages);
         },
-        "refresh" | "ref" => {
+        "refresh" | "ref" | "U" | "update" => {
+            peng_shop_backend::refresh();
+        },
+        "upgrade" => {
             peng_shop_backend::upgrade();
+        },
+        "dup" => {
+            peng_shop_backend::distribution_upgrade();
         },
         "exit" | "q" | "e" => {
             println!("Exiting TUI");
